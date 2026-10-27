@@ -1,0 +1,2 @@
+- Scroll-reveal animations use the shared `Reveal` component (IntersectionObserver + `.reveal` CSS in styles.css) — one consistent, lightweight animation system without extra libraries.
+- Site-wide floating UI (e.g. the WhatsApp contact button) renders once in the root layout's component, after `<Outlet />`, so it appears on every route; any color token it needs must be defined in `:root`, not inside a page-scoped class, or it renders unstyled on other pages.
