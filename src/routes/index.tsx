@@ -1,17 +1,8 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Reveal } from "@/components/Reveal";
 import { useState } from "react";
-import { Menu, X, ArrowRight } from "lucide-react";
+import { Menu, X } from "lucide-react";
 
-import m1 from "@/assets/lp/rectangle-9.jpg";
-import m2 from "@/assets/lp/rectangle-9-2.jpg";
-import m3 from "@/assets/lp/rectangle-9-3.jpg";
-import m4 from "@/assets/lp/rectangle-9-4.jpg";
-import m5 from "@/assets/lp/rectangle-9-5.jpg";
-import m6 from "@/assets/lp/rectangle-9-6.jpg";
-import m7 from "@/assets/lp/rectangle-9-7.jpg";
-import m8 from "@/assets/lp/rectangle-9-8.jpg";
-import m9 from "@/assets/lp/rectangle-9-9.jpg";
 import area1 from "@/assets/lp/rectangle-9-10.jpg";
 import area2 from "@/assets/lp/rectangle-9-11.jpg";
 import area3 from "@/assets/lp/rectangle-9-12.jpg";
@@ -53,11 +44,6 @@ export const Route = createFileRoute("/")({
   component: Index,
 });
 
-const team = [
-  ["Thaís", m1], ["Marco", m2], ["Veneza", m3], ["Adriana", m4], ["Rúbia", m5],
-  ["Larissa", m6], ["Andreza", m7], ["Patrícia", m8], ["Levi", m9],
-] as const;
-
 const nav = [
   ["Home", "#home"], ["Sobre nós", "#sobre"], ["Nossos serviços", "#servicos"], ["Contato", "#contato"],
 ] as const;
@@ -71,38 +57,19 @@ function Index() {
   const [open, setOpen] = useState(false);
   return (
     <div className="overflow-x-clip bg-navy text-foreground">
-      {/* ANNOUNCEMENT BAR — Auxílio-Acidente */}
-      <Link
-        to="/auxilio-acidente"
-        className="group block bg-primary py-2.5 text-center transition-colors duration-300 hover:bg-primary/85"
-      >
-        <span className="px-4 text-xs font-medium leading-relaxed text-primary-foreground sm:text-sm">
-          Sofreu um acidente e ficou com sequelas? Descubra se você tem direito a uma indenização.{" "}
-          <ArrowRight className="inline-block h-4 w-4 -translate-y-px align-[-2px] transition-transform duration-300 group-hover:translate-x-1" aria-hidden />
-        </span>
-      </Link>
-
       {/* HEADER */}
       <header className="sticky top-0 z-50 border-b border-pink/20 bg-navy/80 backdrop-blur-xl">
         <div className={`${container} flex h-20 items-center justify-between`}>
           <Link to="/" className="shrink-0 cursor-pointer transition-opacity hover:opacity-80">
             <img src={logoNav} alt="Mocelin Advogadas" className="h-11 w-auto" />
           </Link>
-          <div className="hidden items-center gap-10 md:flex">
-            <nav className="flex items-center gap-12">
-              {nav.map(([l, h], i) => (
-                <a key={l} href={h} className={`text-base font-medium transition-colors duration-300 hover:text-pink ${i === 0 ? "text-pink" : ""} ${linkUnderline}`}>
-                  {l}
-                </a>
-              ))}
-            </nav>
-            <Link
-              to="/auxilio-acidente"
-              className="inline-flex items-center justify-center whitespace-nowrap rounded-sm border border-pink px-5 py-2.5 text-sm font-semibold text-pink transition-all duration-300 hover:bg-pink hover:text-primary-foreground hover:shadow-soft"
-            >
-              Auxílio-Acidente
-            </Link>
-          </div>
+          <nav className="hidden items-center gap-12 md:flex">
+            {nav.map(([l, h], i) => (
+              <a key={l} href={h} className={`text-base font-medium transition-colors duration-300 hover:text-pink ${i === 0 ? "text-pink" : ""} ${linkUnderline}`}>
+                {l}
+              </a>
+            ))}
+          </nav>
           <button aria-label="Menu" onClick={() => setOpen(!open)} className="p-2 text-pink md:hidden">
             {open ? <X /> : <Menu />}
           </button>
@@ -114,13 +81,6 @@ function Index() {
                 {l}
               </a>
             ))}
-            <Link
-              to="/auxilio-acidente"
-              onClick={() => setOpen(false)}
-              className="mt-3 inline-flex items-center justify-center rounded-sm border border-pink px-5 py-3 text-base font-semibold text-pink transition-colors duration-300 hover:bg-pink hover:text-primary-foreground"
-            >
-              Auxílio-Acidente
-            </Link>
           </nav>
         )}
       </header>
@@ -174,21 +134,6 @@ function Index() {
               </span>
             ))}
           </Reveal>
-        </div>
-      </section>
-
-      {/* EQUIPE */}
-      <section className={`${container} pb-24 lg:pb-32`}>
-        <div className="flex flex-wrap justify-center gap-3">
-          {team.map(([name, src], i) => (
-            <Reveal key={name} delay={(i % 5) * 90} className="w-[calc(50%-6px)] sm:w-[calc(33.333%-8px)] lg:w-[232px]">
-              <div className="group relative aspect-square overflow-hidden transition-all duration-500 hover:-translate-y-1.5 hover:shadow-soft">
-                <img src={src} alt={name} className="h-full w-full object-cover grayscale-[30%] transition-all duration-700 group-hover:scale-105 group-hover:grayscale-0" />
-                <div className="absolute inset-0 bg-linear-to-t from-navy/80 via-transparent to-transparent opacity-80 transition-opacity duration-500 group-hover:opacity-100" />
-                <p className="absolute bottom-3 left-4 text-xl font-semibold tracking-[-0.02em] text-pink transition-transform duration-500 group-hover:-translate-y-1 sm:text-[25px]">{name}</p>
-              </div>
-            </Reveal>
-          ))}
         </div>
       </section>
 
@@ -276,20 +221,8 @@ function Index() {
         </div>
       </section>
 
-      {/* MÍDIAS */}
-      <section className={`${container} py-20 lg:py-28`}>
-        <Reveal as="h2" className="text-5xl font-bold tracking-[-0.02em] sm:text-6xl xl:text-[70px]">Mídias Sociais</Reveal>
-        <div className="mt-12 grid gap-6 sm:grid-cols-3 lg:gap-10">
-          {[0, 1, 2].map((i) => (
-            <Reveal key={i} delay={i * 120}>
-              <div className="aspect-[362/452] bg-wine transition-all duration-500 hover:-translate-y-2 hover:shadow-soft" />
-            </Reveal>
-          ))}
-        </div>
-      </section>
-
       {/* CONTATO */}
-      <section id="contato" className={`${container} pb-20`}>
+      <section id="contato" className={`${container} pb-20 pt-20 lg:pt-28`}>
         <Reveal as="h2" className="text-5xl font-bold tracking-[-0.02em] sm:text-6xl xl:text-[70px]">Entre em contato</Reveal>
         <div className="mt-12 grid gap-5 md:grid-cols-2">
           {[
