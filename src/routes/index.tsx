@@ -1,5 +1,12 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Reveal } from "@/components/Reveal";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel";
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
 
@@ -14,11 +21,6 @@ import arrowDown from "@/assets/lp/vector-3.svg";
 import aboutImg from "@/assets/lp/rectangle-8-2.jpg";
 import iconEff from "@/assets/lp/vector-4.svg";
 import iconInov from "@/assets/lp/vector-5.svg";
-import adidas from "@/assets/lp/25-1.png";
-import assai from "@/assets/lp/vector-6.svg";
-import patria from "@/assets/lp/15-2-1.svg";
-import arrowLeft from "@/assets/lp/vector-7.svg";
-import arrowRight from "@/assets/lp/vector-8.svg";
 import officePhoto from "@/assets/lp/rectangle-11.jpg";
 import logoOverlay from "@/assets/lp/logomocelinadvbrancov2-1.png";
 import logoNav from "@/assets/lp/logomocelinadvbrancov2-2.png";
@@ -46,6 +48,26 @@ export const Route = createFileRoute("/")({
 
 const nav = [
   ["Home", "#home"], ["Sobre nós", "#sobre"], ["Nossos serviços", "#servicos"], ["Contato", "#contato"],
+] as const;
+
+const clients = [
+  { id: 1, name: "Cliente 1", src: "/images/parceiros/parceiro-1.png" },
+  { id: 2, name: "Cliente 2", src: "/images/parceiros/parceiro-2.png" },
+  { id: 3, name: "Cliente 3", src: "/images/parceiros/parceiro-3.png" },
+  { id: 4, name: "Cliente 4", src: "/images/parceiros/parceiro-4.png" },
+  { id: 5, name: "Cliente 5", src: "/images/parceiros/parceiro-5.png" },
+  { id: 6, name: "Cliente 6", src: "/images/parceiros/parceiro-6.png" },
+  { id: 7, name: "Cliente 7", src: "/images/parceiros/parceiro-7.png" },
+  { id: 8, name: "Cliente 8", src: "/images/parceiros/parceiro-8.png" },
+  { id: 9, name: "Cliente 9", src: "/images/parceiros/parceiro-9.png" },
+  { id: 10, name: "Cliente 10", src: "/images/parceiros/parceiro-10.png" },
+  { id: 11, name: "Cliente 11", src: "/images/parceiros/parceiro-11.png" },
+  { id: 12, name: "Cliente 12", src: "/images/parceiros/parceiro-12.png" },
+  { id: 13, name: "Cliente 13", src: "/images/parceiros/parceiro-13.png" },
+  { id: 14, name: "Cliente 14", src: "/images/parceiros/parceiro-14.png" },
+  { id: 15, name: "Cliente 15", src: "/images/parceiros/parceiro-15.png" },
+  { id: 16, name: "Cliente 16", src: "/images/parceiros/parceiro-16.png" },
+  { id: 17, name: "Cliente 17", src: "/images/parceiros/parceiro-17.png" },
 ] as const;
 
 const container = "mx-auto w-full max-w-[1206px] px-6 sm:px-10 xl:px-0";
@@ -208,14 +230,31 @@ function Index() {
               <h2 className="text-4xl font-bold leading-[1.16] tracking-[-0.02em] sm:text-[44px]">Alguns clientes que atendemos</h2>
               <p className="max-w-[298px] text-lg">Clientes que confiam seus processos na Mocelin:</p>
             </Reveal>
-            <Reveal delay={150} className="flex items-center justify-between gap-3">
-              <img src={arrowLeft} alt="" aria-hidden className="h-10 w-8 shrink-0 cursor-pointer transition-transform hover:-translate-x-1 sm:h-14 sm:w-11" />
-              <div className="flex flex-1 items-center justify-around gap-4">
-                {[adidas, patria, assai].map((src, i) => (
-                  <img key={i} src={src} alt="Cliente" className="h-14 w-auto max-w-[30%] object-contain opacity-90 transition-all duration-500 hover:scale-110 hover:opacity-100 sm:h-24 lg:h-28" />
-                ))}
-              </div>
-              <img src={arrowRight} alt="" aria-hidden className="h-10 w-8 shrink-0 cursor-pointer transition-transform hover:translate-x-1 sm:h-14 sm:w-11" />
+            <Reveal delay={150} className="min-w-0">
+              <Carousel opts={{ align: "start", loop: true }} className="w-full px-10 sm:px-14">
+                <CarouselContent>
+                  {clients.map((client) => (
+                    <CarouselItem key={client.id} className="basis-1/2 md:basis-1/4 lg:basis-1/5">
+                      <div className="flex h-14 items-center justify-center px-1 sm:h-24 lg:h-28">
+                        <img
+                          src={client.src}
+                          alt={client.name}
+                          loading="lazy"
+                          className="max-h-full w-auto max-w-full object-contain opacity-90 transition-all duration-500 hover:scale-110 hover:opacity-100"
+                        />
+                      </div>
+                    </CarouselItem>
+                  ))}
+                </CarouselContent>
+                <CarouselPrevious
+                  variant="ghost"
+                  className="left-0 size-auto h-10 w-8 rounded-none border-0 bg-transparent text-white shadow-none hover:bg-transparent hover:text-white sm:h-14 sm:w-10 [&_svg]:size-7"
+                />
+                <CarouselNext
+                  variant="ghost"
+                  className="right-0 size-auto h-10 w-8 rounded-none border-0 bg-transparent text-white shadow-none hover:bg-transparent hover:text-white sm:h-14 sm:w-10 [&_svg]:size-7"
+                />
+              </Carousel>
             </Reveal>
           </div>
         </div>
